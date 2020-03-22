@@ -42,18 +42,24 @@ def help(update, context):
 def echo(update, context):
     """Echo the user message."""
     update.message.reply_text(update.message.text)
+    send_message(update.message.chat_id, "send_message_text")
+    
 
 
 def error(update, context):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    logger.warning('Update "%s" caused error "%s"', update, context.error)s
+
+def send_message(chat_id, message):
+    send_url=f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
+    requests.get(send_url)
 
 
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
+    # Post version 12 this will no longer be necessarytele
     updater = Updater(TOKEN, use_context=True)
 
     # Get the dispatcher to register handlers
