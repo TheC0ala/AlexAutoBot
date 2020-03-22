@@ -15,13 +15,14 @@ bot.
 """
 
 import logging
+from datetime import date
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from config import TOKEN, URL
 
 
 # Enable logging
-logging.basicConfig(file = "%(asctime)s.log", format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(filename = "%s.log".format(date.today().strftime("%b-%d-%Y")), format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
