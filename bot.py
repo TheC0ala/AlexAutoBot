@@ -15,6 +15,7 @@ bot.
 """
 
 import logging
+import requests
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from config import TOKEN, URL
@@ -41,14 +42,13 @@ def help(update, context):
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
     send_message(update.message.chat_id, "send_message_text")
+    update.message.reply_text(update.message.text)
     
-
 
 def error(update, context):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)s
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def send_message(chat_id, message):
     send_url=f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
