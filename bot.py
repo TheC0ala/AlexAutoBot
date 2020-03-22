@@ -70,7 +70,13 @@ def main():
     dp.add_error_handler(error)
 
     # Start the Bot
-    updater.start_polling()
+    #updater.start_polling()
+    updater.start_webhook(listen='0.0.0.0',
+                      port=8443,
+                      url_path=TOKEN,
+                      key='private.key',
+                      cert='cert.pem',
+                      webhook_url='https://'+URL+':8443/'+TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
