@@ -62,7 +62,7 @@ def callback_alarm(context):
     context.bot.send_message(chat_id=context.job.context, text='Azazaza')
 
 def stop_loop(update, context):
-    send_message(chat_id=update.message.chat_id, text="Stopping loop!")
+    send_message(chat_id=update.message.chat_id, message="Stopping loop!")
     context.job_queue.stop()
 
 
