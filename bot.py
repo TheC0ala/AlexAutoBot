@@ -61,6 +61,10 @@ def start_loop(update, context):
 def callback_alarm(context):
     context.bot.send_message(chat_id=context.job.context, text='Azazaza')
 
+def stop_loop(update, context):
+    send_message(chat_id=update.message.chat_id, text="Stopping loop!")
+    context.job_queue.stop()
+
 
 def main():
     """Start the bot."""
@@ -76,6 +80,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("start_loop", start_loop))
+    dp.add_handler((CommandHandler("stop_loop", stop_loop))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
