@@ -56,7 +56,7 @@ def send_message(chat_id, message):
 
 def start_loop(update, context):
     send_message(chat_id=update.message.chat_id, message='Starting loop!')
-    context.job_queue.run_repeating(callback_alarm, interval=10, first=0)
+    context.job_queue.run_repeating(callback_alarm, interval=10, first=0, context=update.message.chat_id)
 
 def callback_alarm(context):
     context.bot.send_message(chat_id=context.job.context, text='Azazaza')
@@ -75,7 +75,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("start_loop", start_loop, pass_job_queue=True))
+    dp.add_handler(CommandHandler("start_loop", start_loop))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
