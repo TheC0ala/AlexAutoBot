@@ -55,12 +55,12 @@ def send_message(chat_id, message):
     requests.get(send_url)
 
 def start_loop(update, context,job_queue):
-    bot.send_message(chat_id=update.message.chat_id,
-                      text='Starting!')
+    send_message(chat_id=update.message.chat_id,
+                      message='Starting loop!')
     job_queue.run_repeating(callback_alarm, 5, context=update.message.chat_id)
 
 def callback_alarm(bot, job):
-    send_message(job.context.chat_id, text='Azazaza')
+    send_message(chat_id=job.context.chat_id, message='Azazaza')
 
 def main():
     """Start the bot."""
