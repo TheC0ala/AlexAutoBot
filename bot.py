@@ -54,13 +54,13 @@ def send_message(chat_id, message):
     send_url=f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
     requests.get(send_url)
 
-def start_loop(update, context,job_queue):
+def start_loop(update, context, job_queue):
     send_message(chat_id=update.message.chat_id,
                       message='Starting loop!')
-    job_queue.run_repeating(callback_alarm, 5, context=update.message.chat_id)
+    job_queue.run_repeating(callback_alarm, 5, update=update)
 
-def callback_alarm(bot, job):
-    send_message(chat_id=job.context.chat_id, message='Azazaza')
+def callback_alarm(job, update):
+    send_message(chat_id=update.message.chat_id, message='Azazaza')
 
 def main():
     """Start the bot."""
