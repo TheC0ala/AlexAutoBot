@@ -80,7 +80,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("start_loop", start_loop))
-    dp.add_handler((CommandHandler("stop_loop", stop_loop))
+    dp.add_handler(CommandHandler("stop_loop", stop_loop))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
