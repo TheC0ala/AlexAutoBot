@@ -54,6 +54,13 @@ def send_message(chat_id, message):
     send_url=f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
     requests.get(send_url)
 
+def start_loop(update, context,job_queue):
+    bot.send_message(chat_id=update.message.chat_id,
+                      text='Starting!')
+    job_queue.run_repeating(callback_alarm, 5, context=update.message.chat_id)
+
+def callback_alarm(bot, job):
+    bot.send_message(chat_id=job.context, text='Azazaza')
 
 def main():
     """Start the bot."""
@@ -68,6 +75,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("start_loop", start_loop, pass_job_queue=True))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
